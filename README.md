@@ -5,7 +5,7 @@ Challenger platform API class and examples for Java
 
 This code prepares a call to Challenger server on event happened to a client identified by {client_id}:
 
-~~~~
+```java
 import ChallengerPlatform.*;
 
 // ... your code ...
@@ -18,13 +18,13 @@ myChallenger.setKey('{secret_key}');
 myChallenger.addParam('multiple', '{multiple}'); // Optional
 
 bool resp = myChallenger.trackEvent('{event}');
-~~~~
+```
 
 ## Delete client example
 
 This code prepares a call to Challenger to delete particular client {client_id}:
 
-~~~~
+```java
 import ChallengerPlatform.*;
 
 // ... your code ...
@@ -34,16 +34,14 @@ myChallenger.setClientId('{client_id}');
 myChallenger.setKey('{secret_key}');
 
 bool resp = myChallenger.deleteClient();
-~~~~
-
-
+```
 
 # Performance widgets
 ## Web version
 
 Using the Java helper functions provided with Challenger to get widget HTML is as easy as that:
 
-~~~~
+```java
 import ChallengerPlatform.*;
 
 // ... your code ...
@@ -62,13 +60,13 @@ try{
 }catch(Exception ex){
    // Error happened.
 }
-~~~~
+```
 
 ## Mobile app version
 
 This code creates an encrypted URL for mobile ready widget. It should be passed to mobile app and opened in WebView.
 
-~~~~
+```java
 import ChallengerPlatform.*;
 
 // ... your code ...
@@ -86,4 +84,4 @@ try{
 }catch(Exception ex){
    // Error happened.
 }
-~~~~
+```
