@@ -20,7 +20,7 @@ myChallenger.addParam('multiple', '{multiple}'); // Optional
 bool resp = myChallenger.trackEvent('{event}');
 ~~~~
 
-## Delete client examples
+## Delete client example
 
 This code prepares a call to Challenger to delete particular client {client_id}:
 
