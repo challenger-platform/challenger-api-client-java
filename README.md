@@ -36,6 +36,8 @@ myChallenger.setKey('{secret_key}');
 bool resp = myChallenger.deleteClient();
 ```
 
+N.B. This function is accessible for in-house deployments only.
+
 # Performance widgets
 ## Web version
 
@@ -62,6 +64,8 @@ try{
 }
 ```
 
+N.B. This function is accessible for in-house deployments only.
+
 ## Mobile app version
 
 This code creates an encrypted URL for mobile ready widget. It should be passed to mobile app and opened in WebView.
@@ -85,3 +89,5 @@ try{
    // Error happened.
 }
 ```
+
+N.B. This function is accessible for in-house deployments only.
