@@ -1,5 +1,7 @@
 package com.challengerplatform;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import sun.misc.BASE64Encoder;
 
 import javax.crypto.Cipher;
@@ -34,6 +36,7 @@ public class Challenger {
     }
 
     private final String domain;
+    private String ownerId;
     private String clientId;
     private String key;
     private boolean useHTTPS = false;
@@ -46,6 +49,10 @@ public class Challenger {
      */
     public Challenger(String domain) {
         this.domain = domain;
+    }
+
+    public void setOwnerId(String ownerId){
+        this.ownerId = ownerId;
     }
 
     public void setClientId(String clientId) {
@@ -101,7 +108,11 @@ public class Challenger {
     }
 
     private String trackEventUrl(String event) throws Exception {
-        return protocol() + domain + "/api/v1/trackEvent?data=" + urlencode(encryptedEventData(event));
+        String ownerIdParameter = this.ownerId != null && !this.ownerId.equals("")
+            ? "owner_id=" + urlencode(this.ownerId) + "&"
+            : "";
+
+        return protocol() + domain + "/api/v1/trackEvent?" + ownerIdParameter + "data=" + urlencode(encryptedEventData(event, this.ownerId));
     }
 
     private String protocol() {
@@ -109,22 +120,49 @@ public class Challenger {
     }
 
     private String encryptedWidgetData() throws Exception {
-        return encryptWithAES(buildJson(null));
+        return encryptWithAES(buildJson(null, null));
     }
 
-    private String encryptedEventData(String event) throws Exception {
-        return encryptWithAES(buildJson(event));
+    private String encryptedEventData(String event, String ownerId) throws Exception {
+        return encryptWithAES(buildJson(event, ownerId));
     }
 
-    private String buildJson(String event) {
+    private String buildJson(String event, String ownerId) {
         StringBuilder json = new StringBuilder();
         json.append("{");
-        json.append(jsonString("client_id", clientId));
+        json.append(jsonString("client_id", getClientIdHash(clientId, ownerId)));
         json.append(jsonLiteral("params", paramsJson()));
         if (event != null) {
             json.append(jsonString("event", event));
         }
         return completeJson(json);
+    }
+
+    private static String getClientIdHash(String clientId, String ownerId) {
+        if (ownerId == null || ownerId.equals("")){
+            return clientId;
+        }
+        if (clientId == null){
+            return null;
+        }
+        return getMd5(ownerId + ":" + clientId);
+    }
+
+    private static String getMd5(String value) {
+        try {
+            byte[] hashInBytes = MessageDigest.getInstance("MD5").digest(value.getBytes("UTF-8"));
+
+            StringBuilder sb = new StringBuilder();
+            for (byte b : hashInBytes) {
+                sb.append(String.format("%02x", b));
+            }
+            return sb.toString();
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        return "";
     }
 
     private String jsonString(String key, String value) {
