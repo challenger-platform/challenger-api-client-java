@@ -1,7 +1,16 @@
 Challenger platform API class and examples for Java
 ===
 
-Due to 256 bit keys usage it may be needed to install Java Cryptography Extension (JCE) Unlimited Strength Jurisdiction Policy Files. For Java version 7 (https://www.oracle.com/technetwork/java/javase/downloads/jce8-download-2133166.html) or version 8 (https://www.oracle.com/technetwork/java/javase/downloads/jce8-download-2133166.html)
+NB: Due to 256 bit keys usage it may be needed to install Java Cryptography Extension (JCE) Unlimited Strength Jurisdiction Policy Files. For Java version 7 (https://www.oracle.com/technetwork/java/javase/downloads/jce8-download-2133166.html) or version 8 (https://www.oracle.com/technetwork/java/javase/downloads/jce8-download-2133166.html)
+
+In example below:
+
+ - `your.challenger.domain` - is the domain of your Challenger implementation
+ - `secret_key` - a unique key provided by Challenger to encrypt data exchange
+ - `owner_id` - a unique identifier provided by Challenger (optional)
+ - `client_id` - the identifier of the client performing action
+ - `event_id` - the identifier of the corresponding event in Challenger platform.
+ - `multiple` - for quantifiable challenges (ex. get 1 point for every 1 euro spent). Provide value to multiple points with.
 
 ## Event tracking example
 
