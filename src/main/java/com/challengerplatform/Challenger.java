@@ -17,24 +17,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Challenger {
-    /*
-        Ugly hack to remove java security restrictions. Otherwise you would need to install
-        Java Cryptography Extension (JCE) unlimited strength jurisdiction policy files
-
-        Remove static passage if client is willing to install the files.
-
-        Read more:
-        http://stackoverflow.com/questions/1179672/how-to-avoid-installing-unlimited-strength-jce-policy-files-when-deploying-an
-    */
-    static {
-        try {
-            Field field = Class.forName("javax.crypto.JceSecurity").getDeclaredField("isRestricted");
-            field.setAccessible(true);
-            field.set(null, java.lang.Boolean.FALSE);
-        } catch (Exception ex) {
-        }
-    }
-
     private final String domain;
     private String ownerId;
     private String clientId;

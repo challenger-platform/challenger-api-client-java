@@ -1,7 +1,16 @@
 Challenger platform API class and examples for Java
 ===
 
-Due to 256 bit keys usage it may be needed to install Java Cryptography Extension (JCE) Unlimited Strength Jurisdiction Policy Files. For Java version 7 (https://www.oracle.com/technetwork/java/javase/downloads/jce8-download-2133166.html) or version 8 (https://www.oracle.com/technetwork/java/javase/downloads/jce8-download-2133166.html)
+NB: Due to 256 bit keys usage it may be needed to install Java Cryptography Extension (JCE) Unlimited Strength Jurisdiction Policy Files. For Java version 7 (https://www.oracle.com/technetwork/java/javase/downloads/jce8-download-2133166.html) or version 8 (https://www.oracle.com/technetwork/java/javase/downloads/jce8-download-2133166.html)
+
+In example below:
+
+ - `your.challenger.domain` - is the domain of your Challenger implementation
+ - `secret_key` - a unique key provided by Challenger to encrypt data exchange
+ - `owner_id` - a unique identifier provided by Challenger (optional)
+ - `client_id` - the identifier of the client performing action
+ - `event_id` - the identifier of the corresponding event in Challenger platform.
+ - `multiple` - for quantifiable challenges (ex. get 1 point for every 1 euro spent). Provide value to multiple points with.
 
 ## Event tracking example
 
@@ -41,6 +50,20 @@ bool resp = myChallenger.deleteClient();
 N.B. This function is accessible for in-house deployments only.
 
 # Performance widgets
+
+In examples below:
+ - `your.challenger.domain` - is the domain of your Challenger implementation.
+ - `client_id` - the identifier of the client performing action
+ - `secret_key` - a unique key provided by Challenger to encrypt data exchange
+ - `param1`, `param2`, ... - optional parameters to pass to the widget (For example name of the client). List of parameters Challenger can map:
+   - `expiration` (in format 0000-00-00 00:00:00) - required param
+   - `name`
+   - `surname`
+   - `email`
+   - `phone`
+   - `birthday` (in format 0000-00-00)
+ - `value1`, `value2`,  ... - values of optional parameters.
+
 ## Web version
 
 Using the Java helper functions provided with Challenger to get widget HTML is as easy as that:
