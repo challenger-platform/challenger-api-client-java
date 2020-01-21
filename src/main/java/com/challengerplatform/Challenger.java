@@ -71,6 +71,11 @@ public class Challenger {
         params.put(param, value);
     }
 
+    public String getWidgetScript() throws Exception {
+        assertParameters();
+        return widgetScript();
+    }
+
     public String getWidgetHtml() throws Exception {
         assertParameters();
         return widgetHtml();
@@ -223,20 +228,24 @@ public class Challenger {
         return result.toString();
     }
 
-    private String widgetHtml() throws Exception {
-        return String.format("<div id=\"_chWidget\"></div>\n" +
-                "<script type=\"text/javascript\">\n" +
-                "\t<!--\n" +
-                "\tvar _chw = _chw || {};\n" +
+    private String widgetScript() throws Exception {
+        return String.format("var _chw = _chw || {};\n" +
                 "\t_chw.type = \"iframe\";\n" +
                 "\t_chw.domain = \"%s\";\n" +
                 "\t_chw.data = \"%s\";\n" +
                 "\t(function() {\n" +
                 "\tvar ch = document.createElement(\"script\"); ch.type = \"text/javascript\"; ch.async = true;\n" +
-                "\tch.src = (\"https:\" == document.location.protocol ? \"https://\" : \"http://\") + \"%s/v1/widget/script.js\";\n" +
+                "\tch.src = \"//%s/v1/widget/script.js\";\n" +
                 "\tvar s = document.getElementsByTagName(\"script\")[0]; s.parentNode.insertBefore(ch, s);\n" +
-                "\t})();\n" +
+                "\t})();\n", domain, encryptedWidgetData(), domain);
+    }
+
+    private String widgetHtml() throws Exception {
+        return String.format("<div id=\"_chWidget\"></div>\n" +
+                "<script type=\"text/javascript\">\n" +
+                "\t<!--\n" +
+                "\t%s\n" +
                 "\t//-->\n" +
-                "</script>\n", domain, encryptedWidgetData(), domain);
+                "</script>\n", widgetScript());
     }
 }
