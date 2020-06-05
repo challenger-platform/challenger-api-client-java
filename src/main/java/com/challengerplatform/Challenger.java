@@ -211,7 +211,7 @@ public class Challenger {
     }
 
     private String widgetScript() throws Exception {
-        return String.format("var _chw = _chw || {};\n" +
+        return String.format("_chw = typeof _chw == \"undefined\" ? {} : _chw;\n" +
                 "\t_chw.type = \"iframe\";\n" +
                 "\t_chw.domain = \"%s\";\n" +
                 "\t_chw.data = \"%s\";\n" +
