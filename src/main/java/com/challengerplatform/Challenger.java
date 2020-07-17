@@ -68,6 +68,12 @@ public class Challenger {
         return protocol() + domain + "/widget?data=" + urlencode(encryptedWidgetData());
     }
 
+    public String getEncryptedData() throws Exception {
+        assertParameters();
+        return encryptedWidgetData();
+    }
+
+    
     public boolean trackEvent(String event) throws Exception {
         assertParameters();
         return "ok".equalsIgnoreCase(getResponse(trackEventUrl(event)));
