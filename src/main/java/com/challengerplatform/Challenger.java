@@ -2,17 +2,17 @@ package com.challengerplatform;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import sun.misc.BASE64Encoder;
 
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
-import java.lang.reflect.Field;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
+import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -191,13 +191,13 @@ public class Challenger {
         cipher.init(Cipher.ENCRYPT_MODE, skeySpec);
 
         byte[] encryptedData = cipher.doFinal(data.getBytes("UTF-8"));
-        String base64EncryptedData = new BASE64Encoder().encode(encryptedData)
-                .replaceAll("(?:\\r\\n|\\n\\r|\\n|\\r)", ""); // Another hack, because java encoder adds newline chars every 76 character...
+        String base64EncryptedData = new String(Base64.getMimeEncoder().encode(encryptedData), StandardCharsets.UTF_8)
+                .replaceAll("(?:\\r\\n|\\n\\r|\\n|\\r)", ""); // Another hack, because java encoder adds newline
+                                                              // chars every 76 character...
 
         byte[] iv = cipher.getIV();
-        String base64EncodedIV = new BASE64Encoder().encode(iv)
+        String base64EncodedIV = new String(Base64.getMimeEncoder().encode(iv), StandardCharsets.UTF_8)
                 .replaceAll("(?:\\r\\n|\\n\\r|\\n|\\r)", "");
-
 
         return base64EncryptedData + ":" + base64EncodedIV;
     }
