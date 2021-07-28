@@ -85,6 +85,13 @@ try{
 }catch(Exception ex){
    // Error happened.
 }
+
+// ...
+
+// For locally drawn widgets `getEncryptedData()` method could be used instead of `getWidgetHtml()`. Please refer:
+// https://github.com/challenger-platform/challenger-widget#get-apiwidgetauthenticateuser for more information
+String encryptedData = myChallenger.getEncryptedData();
+
 ```
 
 N.B. This function is not accessible for coalitional partners.
@@ -111,6 +118,12 @@ try{
 }catch(Exception ex){
    // Error happened.
 }
+
+// ...
+
+// For locally drawn widgets `getEncryptedData()` method could be used instead of `getWidgetHtml()`. Please refer:
+// https://github.com/challenger-platform/challenger-widget#get-apiwidgetauthenticateuser for more information
+String encryptedData = myChallenger.getEncryptedData();
 ```
 
 N.B. This function is not accessible for coalitional partners.
