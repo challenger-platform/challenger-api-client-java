@@ -62,7 +62,6 @@ In examples below:
    - `birthday` (in format 0000-00-00)
  - `value1`, `value2`,  ... - values of optional parameters.
 
-## Web version
 
 Using the Java helper functions provided with Challenger to get widget HTML is as easy as that:
 
@@ -80,47 +79,21 @@ myChallenger.addParam('surname', 'Smith'); // Optional
 myChallenger.addParam('{param1}', '{value1}'); // Optional
 myChallenger.addParam('{param2}', '{value2}'); // Optional
 
+// Option A: Get a widget HTML generated on server
 try{
    String resp = myChallenger.getWidgetHtml(); // Return HTML snippet
 }catch(Exception ex){
    // Error happened.
 }
 
-// ...
-
-// For locally drawn widgets `getEncryptedData()` method could be used instead of `getWidgetHtml()`. Please refer:
-// https://github.com/challenger-platform/challenger-widget#get-apiwidgetauthenticateuser for more information
-String encryptedData = myChallenger.getEncryptedData();
-
-```
-
-N.B. This function is not accessible for coalitional partners.
-
-## Mobile app version
-
-This code creates an encrypted URL for mobile ready widget. It should be passed to mobile app and opened in WebView.
-
-```java
-import ChallengerPlatform.*;
-
-// ... your code ...
-
-Challenger myChallenger = new Challenger('{your.challenger.domain}');
-myChallenger.setClientId('{client_id}');
-myChallenger.setKey('{secret_key}');
-myChallenger.addParam('expiration', '0000-00-00 00:00:00'); // Required
-myChallenger.addParam('{param1}', '{value1}');
-myChallenger.addParam('{param2}', '{value2}');
-myChallenger.addParam('mobile', true); // Pass it to get mobile version of the widget
-
+// Option B: Get an URL of the widget generated on server 
 try{
    String resp = myChallenger.getWidgetUrl(); // Return HTML snippet
 }catch(Exception ex){
    // Error happened.
 }
 
-// ...
-
+// Option C: Get and encrypted token to authorize the user and draw the widget on client-side
 // For locally drawn widgets `getEncryptedData()` method could be used instead of `getWidgetHtml()`. Please refer:
 // https://github.com/challenger-platform/challenger-widget#get-apiwidgetauthenticateuser for more information
 String encryptedData = myChallenger.getEncryptedData();
