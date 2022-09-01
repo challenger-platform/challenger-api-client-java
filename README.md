@@ -88,7 +88,7 @@ try{
 
 // Option B: Get an URL of the widget generated on server 
 try{
-   String resp = myChallenger.getWidgetUrl(); // Return HTML snippet
+   String resp = myChallenger.getWidgetUrl(); // Return URL of the widget generation service
 }catch(Exception ex){
    // Error happened.
 }
