@@ -181,7 +181,7 @@ public class Challenger {
         return completeJson(paramsJson);
     }
 
-    private String urlencode(String data) throws UnsupportedEncodingException {
+    public String urlencode(String data) throws UnsupportedEncodingException {
         return URLEncoder.encode(data);
     }
 
