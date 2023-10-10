@@ -59,6 +59,7 @@ In examples below:
    - `surname`
    - `email`
    - `phone`
+   - `lang` (2-digit language code. I.e. "en", "es", "lt", "hr")
    - `birthday` (in format 0000-00-00)
  - `value1`, `value2`,  ... - values of optional parameters.
 
@@ -76,6 +77,7 @@ myChallenger.setKey('{secret_key}');
 myChallenger.addParam('expiration', '0000-00-00 00:00:00'); // Required
 myChallenger.addParam('name', 'John'); // Optional
 myChallenger.addParam('surname', 'Smith'); // Optional
+myChallenger.addParam('lang', 'en'); // Optional
 myChallenger.addParam('{param1}', '{value1}'); // Optional
 myChallenger.addParam('{param2}', '{value2}'); // Optional
 
